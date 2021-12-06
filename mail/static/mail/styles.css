@@ -1,0 +1,10 @@
+textarea {
+    min-height: 400px;
+}
+
+.date {
+    font-size: 13px;
+}
+.email-preview:hover {
+    border: 1px solid black;
+}
