@@ -1,0 +1,74 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <h2>{{person.username}}</h2>
+    <h5>followers: {{person.followers.count}}</h5>
+    <h5>following: {{person.following.count}}</h5>
+
+    {% if request.user.is_authenticated and request.user != person %}
+        <form onsubmit="event.preventDefault()">
+            <input hidden type="number" value="{{person.id}}" name="user_id" id="user_id">
+            <input value="follow" id="following_request" class="btn btn-primary" type="submit">
+            {% for follow_object in person.followers.all %}
+                {% if request.user == follow_object.follower %}
+                    <script>follow_button_value("follow")</script>
+                {% endif %}
+            {% endfor %}
+        </form>
+    {% endif %}
+    {% for post in post_list %}
+        <div class="card border-primary mb-3" style="max-width: 50rem;">
+            <div class="card-body text-primary">
+                <p class="card-text">{{post.text}}</p>
+                <p class="card-text" style="font-size: small;">{{post.date_time}}</p>
+                <p class="card-text" style="font-size: small;">likes: {{post.like_count}}</p>
+                {% if request.user == post.poster %}
+                    <a href="{% url 'edit' post.id %}">edit</a>
+                {% endif %}
+            </div>
+            {% if request.user.is_authenticated %}
+            <input type="submit" class="btn btn-primary like" id="{{post.id}}" value="like">
+          {% endif %}
+          {% if post in request.user.liked_posts.all %}
+            <script>
+              document.getElementById({{post.id}}).value = "liked"
+            </script>
+          {% endif %}
+          <script>
+            document.getElementById({{post.id}}).addEventListener('click', function(){
+              console.log({{post.id}})
+              fetch('/like', {
+                method: 'POST',
+                body: JSON.stringify({
+                    post_id: {{post.id}},
+                  }),
+              })
+              .then(response => response.json())
+              .then(result => {
+              console.log(result);
+              });
+              if (document.getElementById({{post.id}}).value == "like"){
+                document.getElementById({{post.id}}).value = "liked"
+              }
+              else{
+                document.getElementById({{post.id}}).value = "like"
+              }
+              return false;
+            })
+          </script>
+        </div>
+    {% endfor %}
+    {% if post_list.has_previous %}
+          <a href="?page={{post_list.previous_page_number}}">&laquo previous</a>
+    {% endif %}
+    page {{post_list.number}} of {{post_list.paginator.num_pages}}
+    {% if post_list.has_next %}
+        <a href="?page={{post_list.next_page_number}}">next &raquo</a>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/javascript.js' %}?{% now 'U' %}"></script>
+{% endblock %}
