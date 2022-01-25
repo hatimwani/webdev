@@ -1,0 +1,29 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block style %}
+    <style>
+        #input_field{
+            visibility: hidden;
+        }
+        h1{
+            position: absolute;
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Edit {{title}}</h1>
+    <form action="{% url 'create_page' %}" method="POST" id='form'>
+        {% csrf_token %}
+        {{ form }}
+        <div>
+            <input type="submit" value="Save"  class="btn btn-primary">
+        </div>
+    </form>
+{% endblock %}
