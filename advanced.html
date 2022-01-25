@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Advanced Search</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        
+    </head>
+    <body>
+        <div class="head">
+            <div class="logo2">
+                <img src="google-2015.svg" alt="google">
+            </div>
+            <div class="links">
+                <a href="index.html">Google Search</a>
+            </div>
+        </div>
+        <div class="advanced">
+            <div>
+                Advanced Search
+            </div>
+        </div>
+
+        <form action="https://google.com/search">   
+            <div class="grid">
+                <div class="grid-item x">Find pages with...</div>
+                <div class="grid-item"></div>
+                <div class="grid-item y three">To do this in search box</div>
+
+                <div class="grid-item">all these words:</div>
+                <div class="grid-item"><input name="as_q" type="text" class="in"></div>
+                <div class="grid-item three">Type the important words: tri-colour rat terrier</div>
+
+                <div class="grid-item">this exact word or phrase:</div>
+                <div class="grid-item"><input name="as_epq" type="text" class="in"></div>
+                <div class="grid-item three">Put exact words in quotes: "rat terrier"</div>
+
+                <div class="grid-item">any of these words:</div>
+                <div class="grid-item"><input name="as_oq" type="text" class="in"></div>
+                <div class="grid-item three">Type OR between all the words you want: miniature OR standard</div>
+
+                <div class="grid-item">none of these words:</div>
+                <div class="grid-item"><input name="as_eq" type="text" class="in"></div>
+                <div class="grid-item three">Put a minus sign just before words that you don't want: -rodent, -"Jack Russell"
+                </div>
+                <div class="grid-item">numbers ranging from:</div>
+                <div class="grid-item">
+                    <div class="grid2">
+                        <input name="as_nlo" type="text" class="in">
+                        <b>to</b>
+                        <input name="as_nhi" type="text" class="in">
+                    </div>
+                </div>
+                <div class="grid-item three">Put two full stops between the numbers and add a unit of measurement: 10..35 kg, £300..£500, 2010..2011
+                </div>
+            </div>
+            <div class="grid">
+                <div></div>
+                <div><input class="button ad" type="submit" value="Advanced Search"></div>
+                <div></div>
+            </div>
+        </form>
+    </body>
+</html>
