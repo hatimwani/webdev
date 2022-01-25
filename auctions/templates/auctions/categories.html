@@ -1,0 +1,19 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Category</h2>
+    <form class="row g-3" action="{% url 'categories' %}" method="post">
+        {% csrf_token %}
+        <div class="col-auto" style="min-width: 50%;">
+            <select class="form-control" name="category">
+                <option hidden disabled selected value>Search for a category</option>
+                {% for category in categories %}
+                    <option value="{{category.id}}">{{category.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Apply</button>
+        </div>
+    </form>
+{% endblock %}
